@@ -2,6 +2,8 @@ import React, { useContext, useEffect } from "react";
 import { StoreContext } from "../context/StoreContext";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import axios from "axios";
 const PlaceOrder = () => {
   const { countTotalCartAmount, token, food_list, cartItem, url } =
@@ -26,10 +28,9 @@ const PlaceOrder = () => {
   const placeorderhandler = async (e) => {
     e.preventDefault();
     let orderItems = [];
-    food_list.map((item) => {
+    food_list.forEach((item) => {
       if (cartItem[item._id] > 0) {
-        const iteminfo = { ...item, quantity: cartItem[item._id] };
-        orderItems.push(iteminfo);
+        orderItems.push({ ...item, quantity: cartItem[item._id] });
       }
     });
 
@@ -49,14 +50,20 @@ const PlaceOrder = () => {
         const { session_url } = res.data;
         window.location.href = session_url;
       } else {
-        alert("Order placement failed. Please try again.");
+        toast.error("Order placement failed. Please try again.", {
+          position: "top-right",
+          autoClose: 3000,
+        });
       }
     } catch (error) {
       console.error(
         "Error placing order:",
         error.response?.data || error.message
       );
-      alert("Something went wrong. Please try again.");
+      toast.error("Something went wrong. Please try again.", {
+        position: "top-right",
+        autoClose: 3000,
+      });
     }
   };
 
@@ -65,8 +72,18 @@ const PlaceOrder = () => {
   useEffect(() => {
     if (!token) {
       navigate("/cart");
+      toast.info("Please log in to place an order", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+      setTimeout(() => navigate("/cart"), 1000);
     } else if (countTotalCartAmount() === 0) {
       navigate("/cart");
+      toast.info("Your cart is empty", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+      setTimeout(() => navigate("/cart"), 1000);
     }
   }, []);
 

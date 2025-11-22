@@ -52,6 +52,7 @@
 // };
 
 // export default Verify;
+
 import React, { useEffect, useContext } from "react";
 import "../components/Header.css";
 import axios from "axios";
@@ -67,7 +68,7 @@ const Verify = () => {
 
   const verifypayment = async () => {
     try {
-      // 🔹 Load the order saved in PlaceOrder.jsx
+      // Load the order saved in PlaceOrder.jsx
       const savedOrder = JSON.parse(localStorage.getItem("pendingOrder"));
       if (!savedOrder) {
         console.error("No pending order found in localStorage");

@@ -46,8 +46,7 @@ const PlaceOrder = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      console.log("Response:", res.data); // Debugging
-
+      console.log("Response:", res.data);
       if (res.data.success) {
         const { session_url } = res.data;
         // is this correct?

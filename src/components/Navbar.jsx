@@ -129,12 +129,12 @@ const Navbar = ({ setLogIn }) => {
         </a>
       </ul>
 
-      {navOpen && (
+      {/* {navOpen && (
         <ul className="flex flex-col gap-4 text-[#49557e] text-[16px] cursor-pointer md:hidden self-start mt-2">
           <li onClick={() => setmenu("home")} className="hover:scale-105">
             home
           </li>
-          <li onClick={() => setmenu("menu")} className="hover:scale-105">
+          <li onClick={() => nevigate(/#explore-menu)} className="hover:scale-105">
             menu
           </li>
           <li onClick={() => setmenu("mobile-app")} className="hover:scale-105">
@@ -143,6 +143,50 @@ const Navbar = ({ setLogIn }) => {
           <li onClick={() => setmenu("contact us")} className="hover:scale-105">
             contact us
           </li>
+        </ul>
+      )} */}
+      {navOpen && (
+        <ul className="flex flex-col gap-4 text-[#49557e] text-[16px] cursor-pointer md:hidden self-start mt-2">
+          <Link
+            to="/"
+            onClick={() => {
+              setmenu("home");
+              setNavOpen(false); // close menu after click
+            }}
+            className="hover:scale-105"
+          >
+            home
+          </Link>
+          <a
+            href="#explore-menu"
+            onClick={() => {
+              setmenu("menu");
+              setNavOpen(false);
+            }}
+            className="hover:scale-105"
+          >
+            menu
+          </a>
+          <a
+            href="#app-download"
+            onClick={() => {
+              setmenu("mobile-app");
+              setNavOpen(false);
+            }}
+            className="hover:scale-105"
+          >
+            mobile-app
+          </a>
+          <a
+            href="#footer"
+            onClick={() => {
+              setmenu("contact us");
+              setNavOpen(false);
+            }}
+            className="hover:scale-105"
+          >
+            contact us
+          </a>
         </ul>
       )}
 

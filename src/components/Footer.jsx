@@ -79,7 +79,7 @@ const Footer = () => {
       <hr className="w-full h-0.5 bg-[#808080] border-none" />
 
       <p className="text-center text-sm text-[#7a8ed0] tracking-wide">
-        Copyright © 2025 FitZilla . All rights reserved.
+        Copyright © {new Date().getFullYear()} FitZilla . All rights reserved.
       </p>
     </footer>
   );

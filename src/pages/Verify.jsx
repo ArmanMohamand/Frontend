@@ -52,7 +52,6 @@
 // };
 
 // export default Verify;
-
 import React, { useEffect, useContext } from "react";
 import "../components/Header.css";
 import axios from "axios";
@@ -63,32 +62,29 @@ const Verify = () => {
   const [searchParams] = useSearchParams();
   const success = searchParams.get("success");
 
-  const { url, token, userId, cartItem, food_list, countTotalCartAmount } =
-    useContext(StoreContext);
+  const { url, token } = useContext(StoreContext);
   const navigate = useNavigate();
 
   const verifypayment = async () => {
     try {
-      let orderItems = [];
-      food_list.forEach((item) => {
-        if (cartItem[item._id] > 0) {
-          orderItems.push({ ...item, quantity: cartItem[item._id] });
-        }
-      });
+      // 🔹 Load the order saved in PlaceOrder.jsx
+      const savedOrder = JSON.parse(localStorage.getItem("pendingOrder"));
+      if (!savedOrder) {
+        console.error("No pending order found in localStorage");
+        navigate("/cart");
+        return;
+      }
 
-      const orderData = {
-        userId,
-        items: orderItems,
-        amount: countTotalCartAmount() + 20,
-        address: {}, // optional: pass delivery info if stored
-        success,
-      };
+      // Merge success flag into saved order
+      const orderData = { ...savedOrder, success };
 
       const res = await axios.post(`${url}/api/order/verifyorder`, orderData, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
       if (res.data.success) {
+        // Clear localStorage after successful verification
+        localStorage.removeItem("pendingOrder");
         navigate("/myorders");
       } else {
         navigate("/cart");

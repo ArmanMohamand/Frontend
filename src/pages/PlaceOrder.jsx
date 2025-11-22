@@ -50,6 +50,8 @@ const PlaceOrder = () => {
 
       if (res.data.success) {
         const { session_url } = res.data;
+        // is this correct?
+        localStorage.setItem("pendingOrder", JSON.stringify(orderData));
         window.location.href = session_url;
       } else {
         toast.error("Order placement failed. Please try again.", {

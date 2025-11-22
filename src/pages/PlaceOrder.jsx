@@ -77,7 +77,7 @@ const PlaceOrder = () => {
         autoClose: 3000,
       });
       setTimeout(() => navigate("/cart"), 1000);
-    } else if (countTotalCartAmount() === 0) {
+    } else if (countTotalCartAmount() === 20) {
       navigate("/cart");
       toast.info("Your cart is empty", {
         position: "top-right",

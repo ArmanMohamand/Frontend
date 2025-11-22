@@ -34,7 +34,7 @@ const Navbar = ({ setLogIn }) => {
   }, []);
 
   return (
-    <div className="relative flex flex-col md:flex-row md:justify-between items-center py-5 px-5 md:px-10 lg:px-20 gap-5 md:gap-0">
+    <div className=" sticky top-0 z-50 bg-white md:relative flex flex-col md:flex-row md:justify-between items-center py-5 px-5 md:px-10 lg:px-20 gap-5 md:gap-0">
       <Link to="/">
         <h1 className="text-[#bfb5b3e9] text-4xl lg:text-5xl font-semibold">
           FitZilla

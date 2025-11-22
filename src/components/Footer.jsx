@@ -1,5 +1,4 @@
-import React from "react";
-import { assets } from "../assets/assets";
+import { FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -18,10 +17,33 @@ const Footer = () => {
             satisfaction to every plate. Order now and enjoy food made with
             love, delivered fast
           </p>
+
           <div className="social_icon flex gap-4">
-            <img className="w-10" src={assets.facebook_icon} alt="Facebook" />
-            <img className="w-10" src={assets.twitter_icon} alt="Twitter" />
-            <img className="w-10" src={assets.linkedin_icon} alt="LinkedIn" />
+            <a
+              href="https://www.instagram.com/__armankhan_786/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#7a8ed0]"
+            >
+              <FaInstagram className="text-2xl" />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/arman-mohamand-15003828b"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#7a8ed0]"
+            >
+              <FaLinkedin className="text-2xl" />
+            </a>
+
+            <a
+              href="https://github.com/ArmanMohamand"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#7a8ed0]"
+            >
+              <FaGithub className="text-2xl" />
+            </a>
           </div>
         </div>
 
@@ -42,7 +64,12 @@ const Footer = () => {
             Get In Touch
           </h2>
           <ul className="text-sm space-y-2.5">
-            <li className="cursor-pointer hover:text-white">+91-6376999821</li>
+            <a
+              href="tel:+6376999821"
+              className="cursor-pointer hover:text-white"
+            >
+              +91-6376999821
+            </a>
             <li className="cursor-pointer hover:text-white">
               fitzilladel@gmail.com
             </li>

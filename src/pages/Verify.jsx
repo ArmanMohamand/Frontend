@@ -69,7 +69,6 @@ const Verify = () => {
 
   const verifypayment = async () => {
     try {
-      // Build items again from cart context
       let orderItems = [];
       food_list.forEach((item) => {
         if (cartItem[item._id] > 0) {
@@ -81,7 +80,7 @@ const Verify = () => {
         userId,
         items: orderItems,
         amount: countTotalCartAmount() + 20,
-        address: {}, // you can pass delivery info if stored in context/state
+        address: {}, // optional: pass delivery info if stored
         success,
       };
 

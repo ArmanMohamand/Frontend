@@ -9,7 +9,6 @@ const StoreContextProvider = (props) => {
     return savedCart ? JSON.parse(savedCart) : {};
   });
 
-  // Initialize token from localStorage
   const [token, settoken] = useState(localStorage.getItem("token") || "");
   const [food_list, setfood_list] = useState([]);
 
@@ -19,13 +18,13 @@ const StoreContextProvider = (props) => {
     if (!cartItem[itemId]) {
       setcartItem((prev) => {
         const updated = { ...prev, [itemId]: 1 };
-        localStorage.setItem("cart", JSON.stringify(updated)); 
+        localStorage.setItem("cart", JSON.stringify(updated));
         return updated;
       });
     } else {
       setcartItem((prev) => {
         const updated = { ...prev, [itemId]: prev[itemId] + 1 };
-        localStorage.setItem("cart", JSON.stringify(updated)); 
+        localStorage.setItem("cart", JSON.stringify(updated));
         return updated;
       });
     }
@@ -42,8 +41,8 @@ const StoreContextProvider = (props) => {
   const delete_from_cart = async (itemId) => {
     setcartItem((prev) => {
       const updated = { ...prev, [itemId]: prev[itemId] - 1 };
-      if (updated[itemId] <= 0) delete updated[itemId]; 
-      localStorage.setItem("cart", JSON.stringify(updated)); 
+      if (updated[itemId] <= 0) delete updated[itemId];
+      localStorage.setItem("cart", JSON.stringify(updated));
       return updated;
     });
 

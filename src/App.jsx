@@ -9,6 +9,9 @@ import PlaceOrder from "./pages/PlaceOrder";
 import MyOrders from "./pages/MyOrders";
 import Footer from "./components/Footer";
 import LogInPopUp from "./components/LogInPopUp";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+
 function App() {
   const [LogIn, setLogIn] = useState(false);
   return (
@@ -25,6 +28,7 @@ function App() {
         </Routes>
       </div>
       <Footer />
+      <ToastContainer position="top-right" autoClose={3000} />
     </>
   );
 }

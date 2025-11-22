@@ -3,17 +3,20 @@ import { assets } from "../assets/assets";
 
 const Footer = () => {
   return (
-    <footer  id="footer"  className="footer bg-[#323232] text-[#d9d9d9] px-6 md:px-[8vw] py-10 mt-24 flex flex-col items-center gap-10">
+    <footer
+      id="footer"
+      className="footer bg-[#323232] text-[#d9d9d9] px-6 md:px-[8vw] py-10 mt-24 flex flex-col items-center gap-10"
+    >
       <div className="w-full grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr] gap-10 md:gap-20">
         <div className="Ft-left flex flex-col gap-5">
           <h1 className="text-[#bfb5b3e9] text-4xl md:text-5xl font-semibold">
-            FitZilla  
+            FitZilla
           </h1>
           <p className="text-sm leading-relaxed">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Necessitatibus dicta unde ullam nihil officiis illo iusto, non
-            fugiat distinctio soluta, nobis dolorum sapiente rerum vitae odio
-            nam voluptates assumenda ipsam?
+            Fresh flavors crafted daily with care and passion. Serving wholesome
+            meals that delight your taste buds, bringing comfort, joy, and
+            satisfaction to every plate. Order now and enjoy food made with
+            love, delivered fast
           </p>
           <div className="social_icon flex gap-4">
             <img className="w-10" src={assets.facebook_icon} alt="Facebook" />

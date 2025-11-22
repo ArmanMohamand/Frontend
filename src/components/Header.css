@@ -1,0 +1,49 @@
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes loader {
+  0% {
+    background-position: -800px 0px;
+  }
+  100% {
+    background-position: 800px 0px;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.Anime-4 {
+  animation: rotate 1s linear infinite;
+}
+
+.Anima {
+  animation: fadeIn 3s;
+}
+
+.Anima-2 {
+  animation: fadeIn 1250ms;
+}
+.Anima-3 {
+  animation: fadeIn 500ms;
+}
+.Animaa {
+  animation: loader 3ms infinite linear;
+}
+
+.result {
+  flex-grow: 1;
+  overflow-y: auto;
+}

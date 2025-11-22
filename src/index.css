@@ -1,0 +1,13 @@
+@import "tailwindcss";
+@keyframes Fadein{
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+html {
+  scroll-behavior: smooth;
+  font-family:sans-serif;
+}

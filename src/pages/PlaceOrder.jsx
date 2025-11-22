@@ -214,7 +214,7 @@
 // };
 // export default PlaceOrder;
 
-import React, { useContext, useEffect } from "react";
+import React, {  useContext, useEffect } from "react";
 import { StoreContext } from "../context/StoreContext";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -222,7 +222,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import axios from "axios";
 const PlaceOrder = () => {
-  const { countTotalCartAmount, token, food_list, cartItem, url } =
+  const { countTotalCartAmount, token, food_list, cartItem, url, userId } =
     useContext(StoreContext);
 
   const [data, setdata] = useState({
@@ -251,6 +251,8 @@ const PlaceOrder = () => {
     });
 
     const orderData = {
+      // userId: localStorage.getItem("userId"),
+      userId: userId,
       address: data,
       items: orderItems,
       amount: countTotalCartAmount() + 20,

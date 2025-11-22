@@ -11,6 +11,7 @@ const StoreContextProvider = (props) => {
 
   const [token, settoken] = useState(localStorage.getItem("token") || "");
   const [food_list, setfood_list] = useState([]);
+  const [userId, setUserId] = useState(localStorage.getItem("userId") || "");
 
   const url = "https://backend-1-iyjt.onrender.com";
 
@@ -32,7 +33,7 @@ const StoreContextProvider = (props) => {
     if (token) {
       await axios.post(
         url + "/api/cart/add",
-        { itemId: itemId },
+        { userId: userId, itemId: itemId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
     }
@@ -49,7 +50,7 @@ const StoreContextProvider = (props) => {
     if (token) {
       await axios.post(
         url + "/api/cart/delete",
-        { itemId: itemId },
+        { userId: userId, itemId: itemId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
     }
@@ -78,7 +79,7 @@ const StoreContextProvider = (props) => {
   const loadCartdata = async (token) => {
     const res = await axios.post(
       url + "/api/cart/get",
-      {},
+      { userId },
       { headers: { Authorization: `Bearer ${token}` } } // ✅ safer header
     );
     if (res.data?.data?.cartItems) {
@@ -107,6 +108,8 @@ const StoreContextProvider = (props) => {
     url,
     token,
     settoken,
+    userId,
+    setUserId,
   };
 
   return (

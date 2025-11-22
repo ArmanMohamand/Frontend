@@ -80,7 +80,6 @@ const Cart = () => {
       </div>
 
       <div className="mt-20 flex flex-col md:flex-row justify-between gap-10">
-        {/* Cart Totals */}
         <div className="flex-1 flex flex-col gap-4">
           <h2 className="text-xl md:text-2xl font-semibold">Cart Totals</h2>
           <div className="flex justify-between text-[#555]">

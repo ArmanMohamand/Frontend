@@ -51,6 +51,9 @@ const PasswordPage = () => {
 
   return (
     <div className="min-h-screen grid place-items-center bg-gray-50">
+      <h1 className="text-2xl font-semibold text-teal-400">
+        It can take up to 24 Hour to send reset link
+      </h1>
       <form
         onSubmit={token ? handleReset : handleForgot}
         className="w-[max(23vw,330px)] bg-white rounded-lg p-6 shadow-sm flex flex-col gap-4"

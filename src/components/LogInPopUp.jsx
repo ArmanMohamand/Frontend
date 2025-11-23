@@ -135,7 +135,7 @@ const LogInPopUp = ({ setLogIn }) => {
           </div>
 
           {errorMsg && <p className="text-red-600 text-sm mt-1">{errorMsg}</p>}
-          {cstate === "Login" && (
+          {/* {cstate === "Login" && (
             <p className="text-sm mt-2">
               Forgot your password?{" "}
               <span
@@ -148,7 +148,7 @@ const LogInPopUp = ({ setLogIn }) => {
                 Reset here
               </span>
             </p>
-          )}
+          )} */}
         </div>
 
         <button

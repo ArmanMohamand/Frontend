@@ -7,8 +7,10 @@ import Cart from "./pages/Cart";
 import Verify from "./pages/Verify";
 import PlaceOrder from "./pages/PlaceOrder";
 import MyOrders from "./pages/MyOrders";
+import PasswordPage from "./pages/PasswordPage";
 import Footer from "./components/Footer";
 import LogInPopUp from "./components/LogInPopUp";
+
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
@@ -25,6 +27,8 @@ function App() {
           <Route path="/placeorder" element={<PlaceOrder />} />
           <Route path="/verify" element={<Verify />} />
           <Route path="/myorders" element={<MyOrders />} />
+          <Route path="/forgot-password" element={<PasswordPage />} />
+          <Route path="/reset-password/:token" element={<PasswordPage />} />
         </Routes>
       </div>
       <Footer />

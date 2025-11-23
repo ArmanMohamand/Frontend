@@ -38,7 +38,6 @@ const Cart = () => {
         // Show message with savings
         const savedAmount = subtotal + deliveryFee - res.data.newAmount;
         setPromoMessage(`Promo applied! You saved ₹${savedAmount}`);
-        <h1></h1>
 
         toast.success("Promo code applied successfully", {
           position: "top-right",

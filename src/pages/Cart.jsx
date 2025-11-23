@@ -12,6 +12,7 @@ const Cart = () => {
   const navigate = useNavigate();
 
   // Promo state
+  const [promoMessage, setPromoMessage] = useState("");
   const [promoCode, setPromoCode] = useState("");
   const deliveryFee = 20;
   const [discountedTotal, setDiscountedTotal] = useState(0);
@@ -33,11 +34,18 @@ const Cart = () => {
       });
       if (res.data.success) {
         setDiscountedTotal(res.data.newAmount);
-        toast.success(" Promo code addes succefully", {
+
+        // Show message with savings
+        const savedAmount = subtotal + deliveryFee - res.data.newAmount;
+        setPromoMessage(`Promo applied! You saved ₹${savedAmount}`);
+        <h1></h1>
+
+        toast.success("Promo code applied successfully", {
           position: "top-right",
           autoClose: 3000,
         });
       } else {
+        setPromoMessage("");
         toast.error(res.data.message || "Invalid promo code", {
           position: "top-right",
           autoClose: 3000,
@@ -112,6 +120,9 @@ const Cart = () => {
           >
             Proceed To Checkout
           </button>
+          {promoMessage && (
+            <p className="text-green-600 font-medium mt-2">{promoMessage}</p>
+          )}
         </div>
 
         <div className="flex-1">

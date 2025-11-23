@@ -49,7 +49,6 @@ const PlaceOrder = () => {
       console.log("Response:", res.data);
       if (res.data.success) {
         const { session_url } = res.data;
-        // is this correct?
         localStorage.setItem("pendingOrder", JSON.stringify(orderData));
         window.location.href = session_url;
       } else {

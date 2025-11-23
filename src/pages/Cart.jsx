@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from "react";
 import { StoreContext } from "../context/StoreContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 const Cart = () => {
   const { cartItem, food_list, delete_from_cart, countTotalCartAmount, url } =
@@ -12,14 +14,15 @@ const Cart = () => {
   // Promo state
   const [promoCode, setPromoCode] = useState("");
   const deliveryFee = 20;
-  const subtotal = countTotalCartAmount();
-  const initialTotal = subtotal + deliveryFee;
-  const [discountedTotal, setDiscountedTotal] = useState(initialTotal);
-
-  // Recalculate base total whenever cart changes
+  const [discountedTotal, setDiscountedTotal] = useState(0);
+  const [subtotal, setSubtotal] = useState(0);
   useEffect(() => {
-    setDiscountedTotal(countTotalCartAmount() + deliveryFee);
-  }, [cartItem]);
+    if (food_list.length > 0 && Object.keys(cartItem).length > 0) {
+      const newSubtotal = countTotalCartAmount();
+      setSubtotal(newSubtotal);
+      setDiscountedTotal(newSubtotal + deliveryFee);
+    }
+  }, [cartItem, food_list]);
 
   // Apply promo code
   const applyPromo = async () => {
@@ -30,8 +33,15 @@ const Cart = () => {
       });
       if (res.data.success) {
         setDiscountedTotal(res.data.newAmount);
+        toast.success(" Promo code addes succefully", {
+          position: "top-right",
+          autoClose: 3000,
+        });
       } else {
-        alert(res.data.message || "Invalid promo code");
+        toast.error(res.data.message || "Invalid promo code", {
+          position: "top-right",
+          autoClose: 3000,
+        });
       }
     } catch (err) {
       alert("Error applying promo");
@@ -104,7 +114,6 @@ const Cart = () => {
           </button>
         </div>
 
-        {/* Promo Code */}
         <div className="flex-1">
           <p className="text-[#555] mb-2">
             If you have a promo code, enter it here

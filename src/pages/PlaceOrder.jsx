@@ -1,6 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import { StoreContext } from "../context/StoreContext";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
+
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
@@ -8,6 +10,9 @@ import axios from "axios";
 const PlaceOrder = () => {
   const { countTotalCartAmount, token, food_list, cartItem, url, userId } =
     useContext(StoreContext);
+
+  const location = useLocation();
+  const { discountedTotal, promoCode } = location.state || {};
 
   const [data, setdata] = useState({
     firstName: "",
@@ -34,13 +39,20 @@ const PlaceOrder = () => {
       }
     });
 
+    // const orderData = {
+    //   userId: userId,
+    //   address: data,
+    //   items: orderItems,
+    //   amount: discountedTotal || countTotalCartAmount() + 20, // ✅ use promo if available
+    // };
     const orderData = {
-      // userId: localStorage.getItem("userId"),
       userId: userId,
       address: data,
       items: orderItems,
-      amount: countTotalCartAmount() + 20,
+      amount: discountedTotal || countTotalCartAmount() + 20,
+      promoCode: promoCode || null,
     };
+
     try {
       const res = await axios.post(url + "/api/order/placeorder", orderData, {
         headers: { Authorization: `Bearer ${token}` },
@@ -202,8 +214,15 @@ const PlaceOrder = () => {
           <hr className="h-[1px] bg-[#e2e2e2]" />
           <div className="flex justify-between text-[#555] font-bold">
             <p>Total</p>
-            <b>₹{countTotalCartAmount() + 20}</b>
+            <b>₹{discountedTotal || countTotalCartAmount() + 20}</b>
           </div>
+          {promoCode && (
+            <div className="flex justify-between text-green-600">
+              <p>Discount :Promo Code  ({promoCode})</p>
+              <p>-₹{countTotalCartAmount() + 20 - discountedTotal}</p>
+            </div>
+          )}
+
           <button
             type="submit"
             className="bg-[#e63718e9] w-full md:w-[max(15vw,200px)] py-3 rounded text-white mt-7 hover:bg-[#d5300f] transition"

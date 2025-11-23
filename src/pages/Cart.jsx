@@ -28,35 +28,6 @@ const Cart = () => {
     }
   }, [cartItem, food_list]);
 
-  // const applyPromo = async () => {
-  //   if (!promoCode.trim()) {
-  //     setPromoError("Please enter a promo code");
-  //     return;
-  //   }
-  //   setPromoError("");
-  //   setLoadingPromo(true);
-
-  //   try {
-  //     console.log("Apply promo hit:", req.body);
-  //     const res = await axios.post(`${url}/api/promo/apply`, {
-  //       code: promoCode,
-  //       amount: countTotalCartAmount() + deliveryFee,
-  //     });
-  //     if (res.data.success) {
-  //       setDiscountedTotal(res.data.newAmount);
-  //       const savedAmount = subtotal + deliveryFee - res.data.newAmount;
-  //       setPromoMessage(`Promo applied! You saved ₹${savedAmount}`);
-  //       toast.success("Promo code applied successfully");
-  //     } else {
-  //       setPromoMessage("");
-  //       toast.error(res.data.message || "Invalid promo code");
-  //     }
-  //   } catch {
-  //     toast.error("Error applying promo");
-  //   } finally {
-  //     setLoadingPromo(false);
-  //   }
-  // };
   const applyPromo = async () => {
     if (!promoCode.trim()) {
       setPromoError("Please enter a promo code");
@@ -152,10 +123,18 @@ const Cart = () => {
           </div>
           <button
             className="bg-[#e63718e9] w-full md:w-[max(15vw,200px)] py-3 rounded text-white"
-            onClick={() => navigate("/placeorder")}
+            onClick={() =>
+              navigate("/placeorder", {
+                state: {
+                  discountedTotal,
+                  promoCode,
+                },
+              })
+            }
           >
             Proceed To Checkout
           </button>
+
           {promoMessage && (
             <p className="text-green-600 font-medium mt-2">{promoMessage}</p>
           )}

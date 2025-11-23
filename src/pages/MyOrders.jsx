@@ -71,12 +71,44 @@ const MyOrders = () => {
               </p>
               <p className="text-center sm:text-left">₹{order.amount}.00</p>
               <p className="hidden md:block">Items: {order.items.length}</p>
-              <p className="hidden md:block">
+              {/* <p className="hidden md:block">
                 <span className="text-[#eb434356]">&#x25cf;</span>
                 <b className="font-medium text-[#454545]">{order.status}</b>
               </p>
-              <button  onClick={fetchOrders } className="py-2 px-3 rounded-[4px] bg-[#ffe1e1] cursor-pointer text-[#454545] hover:bg-[#eb4343] hover:text-white transition">
+              <button
+                onClick={fetchOrders}
+                className="py-2 px-3 rounded-[4px] bg-[#ffe1e1] cursor-pointer text-[#454545] hover:bg-[#eb4343] hover:text-white transition"
+              >
                 Track Your Order
+              </button> */}
+              <p className="hidden md:block">
+                <span className="text-[#eb434356]">&#x25cf;</span>
+                <b
+                  className={`font-bold  ${
+                    order.status === "Cancelled"
+                      ? "text-red-500"
+                      : order.status === "Delivered"
+                      ? "text-green-600"
+                      : "text-yellow-700"
+                  }`}
+                >
+                  {order.status}
+                </b>
+              </p>
+
+              <button
+                onClick={fetchOrders}
+                disabled={order.status === "Cancelled"}
+                className={`py-2 px-3 rounded-[4px] transition 
+                ${
+                  order.status === "Cancelled"
+                    ? "bg-gray-300 text-gray-600 hover:bg-[#eb4343]   hover:text-white cursor-not-allowed"
+                    : "bg-[#ffe1e1] text-[#454545] hover:bg-[#eb4343] hover:text-white cursor-pointer"
+                }`}
+              >
+                {order.status === "Cancelled"
+                  ? "Order was cancelled"
+                  : "Track Your Order"}
               </button>
             </div>
           ))

@@ -218,7 +218,7 @@ const PlaceOrder = () => {
           </div>
           {promoCode && (
             <div className="flex justify-between text-green-600">
-              <p>Discount :Promo Code  ({promoCode})</p>
+              <p>Discount :Promo Code ({promoCode})</p>
               <p>-₹{countTotalCartAmount() + 20 - discountedTotal}</p>
             </div>
           )}

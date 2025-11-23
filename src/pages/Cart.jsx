@@ -14,9 +14,12 @@ const Cart = () => {
   // Promo state
   const [promoMessage, setPromoMessage] = useState("");
   const [promoCode, setPromoCode] = useState("");
+  const [promoError, setPromoError] = useState("");
+  const [loadingPromo, setLoadingPromo] = useState(false); // NEW state
   const deliveryFee = 20;
   const [discountedTotal, setDiscountedTotal] = useState(0);
   const [subtotal, setSubtotal] = useState(0);
+
   useEffect(() => {
     if (food_list.length > 0 && Object.keys(cartItem).length > 0) {
       const newSubtotal = countTotalCartAmount();
@@ -25,33 +28,67 @@ const Cart = () => {
     }
   }, [cartItem, food_list]);
 
-  // Apply promo code
+  // const applyPromo = async () => {
+  //   if (!promoCode.trim()) {
+  //     setPromoError("Please enter a promo code");
+  //     return;
+  //   }
+  //   setPromoError("");
+  //   setLoadingPromo(true);
+
+  //   try {
+  //     console.log("Apply promo hit:", req.body);
+  //     const res = await axios.post(`${url}/api/promo/apply`, {
+  //       code: promoCode,
+  //       amount: countTotalCartAmount() + deliveryFee,
+  //     });
+  //     if (res.data.success) {
+  //       setDiscountedTotal(res.data.newAmount);
+  //       const savedAmount = subtotal + deliveryFee - res.data.newAmount;
+  //       setPromoMessage(`Promo applied! You saved ₹${savedAmount}`);
+  //       toast.success("Promo code applied successfully");
+  //     } else {
+  //       setPromoMessage("");
+  //       toast.error(res.data.message || "Invalid promo code");
+  //     }
+  //   } catch {
+  //     toast.error("Error applying promo");
+  //   } finally {
+  //     setLoadingPromo(false);
+  //   }
+  // };
   const applyPromo = async () => {
+    if (!promoCode.trim()) {
+      setPromoError("Please enter a promo code");
+      return;
+    }
+    setPromoError("");
+    setLoadingPromo(true);
+
     try {
       const res = await axios.post(`${url}/api/promo/apply`, {
         code: promoCode,
         amount: countTotalCartAmount() + deliveryFee,
       });
+
       if (res.data.success) {
         setDiscountedTotal(res.data.newAmount);
-
-        // Show message with savings
         const savedAmount = subtotal + deliveryFee - res.data.newAmount;
         setPromoMessage(`Promo applied! You saved ₹${savedAmount}`);
-
-        toast.success("Promo code applied successfully", {
-          position: "top-right",
-          autoClose: 3000,
-        });
+        toast.success("Promo code applied successfully");
       } else {
         setPromoMessage("");
-        toast.error(res.data.message || "Invalid promo code", {
-          position: "top-right",
-          autoClose: 3000,
-        });
+        toast.error(res.data.message || "Invalid promo code");
       }
     } catch (err) {
-      alert("Error applying promo");
+      // Show backend-provided message if available, otherwise generic error
+      if (err.response && err.response.data && err.response.data.message) {
+        toast.error(err.response.data.message);
+      } else {
+        toast.error("Error applying promo");
+      }
+    } finally {
+      setLoadingPromo(false);
     }
   };
 
@@ -134,15 +171,21 @@ const Cart = () => {
               value={promoCode}
               onChange={(e) => setPromoCode(e.target.value)}
               placeholder="Promo Code"
-              className="flex-grow bg-transparent border-none outline-none px-3 py-2 text-sm"
+              className={`flex-grow bg-transparent outline-none px-3 py-2 text-sm 
+                ${promoError ? "border border-red-500" : "border-none"}`}
             />
             <button
               onClick={applyPromo}
-              className="bg-black text-white px-5 py-2 mt-2 sm:mt-0 sm:ml-2 rounded"
+              disabled={loadingPromo}
+              className={`bg-black text-white px-5 py-2 mt-2 sm:mt-0 sm:ml-2 rounded 
+                ${loadingPromo ? "opacity-50 cursor-not-allowed" : ""}`}
             >
-              Submit
+              {loadingPromo ? "Applying..." : "Submit"}
             </button>
           </div>
+          {promoError && (
+            <p className="text-red-500 text-sm mt-1">{promoError}</p>
+          )}
         </div>
       </div>
     </div>

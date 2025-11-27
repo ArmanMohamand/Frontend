@@ -64,7 +64,7 @@ const Cart = () => {
   };
 
   return (
-    <div className="mx-6 md:mx-20 mt-20 text-sm md:text-base">
+    <div className="mx-6 md:mx-20 mt-5 text-sm md:text-base">
       <div className="cartitems">
         <div className="hidden md:grid grid-cols-[1fr_1.5fr_1fr_1fr_1fr_0.5fr] items-center text-[#808080] text-[max(1vw,12px)]">
           <p>Items</p>

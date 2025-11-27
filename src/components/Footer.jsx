@@ -63,16 +63,19 @@ const Footer = () => {
           <h2 className="text-2xl md:text-3xl font-semibold text-[#7a8ed0]">
             Get In Touch
           </h2>
-          <ul className="text-sm space-y-2.5">
+          <ul className="text-sm space-y-2.5 flex flex-col">
             <a
               href="tel:+6376999821"
               className="cursor-pointer hover:text-white"
             >
               +91-6376999821
             </a>
-            <li className="cursor-pointer hover:text-white">
-              fitzilladel@gmail.com
-            </li>
+            <a
+              href="mailto:efoodapp07@gmail.com"
+              className="cursor-pointer hover:text-white"
+            >
+              efoodapp07@gmail.com
+            </a>
           </ul>
         </div>
       </div>

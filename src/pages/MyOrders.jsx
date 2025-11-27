@@ -37,7 +37,7 @@ const MyOrders = () => {
         My Orders
       </h2>
 
-      <div className="flex flex-col gap-[20px] mt-[30px]">
+      <div className="flex flex-col gap-[20px] mt-[30px] cursor-pointer">
         {data.length === 0 ? (
           <p className="text-gray-500 italic">No orders found.</p>
         ) : (
@@ -76,7 +76,7 @@ const MyOrders = () => {
                 className={`font-bold text-center sm:text-left py-2 px-3 rounded-[4px] transition 
               ${
                 order.status === "Cancelled"
-                  ? "bg-gray-300 text-red-600 cursor-not-allowed"
+                  ? " text-red-600"
                   : order.status === "Delivered"
                   ? " text-green-600"
                   : " text-yellow-700"

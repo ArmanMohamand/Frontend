@@ -78,6 +78,8 @@ const MODEL_PRIORITY = [
 ];
 
 const API_KEY = "AIzaSyBCtyio-zXS4HLNwXfDOrXvPuXPsGFUl-w";
+
+// 🔄 Retry helper with exponential backoff
 async function retryWithBackoff(fn, retries = 3, delay = 1000) {
   for (let i = 0; i < retries; i++) {
     try {
@@ -122,10 +124,13 @@ async function runChat(prompt) {
         ],
       });
 
-      // 🔄 Wrap the generateContent call with retry
+      // ✅ Correct request structure
       const result = await retryWithBackoff(() =>
-        generativeModel.generateContent(prompt)
+        generativeModel.generateContent({
+          contents: [{ role: "user", parts: [{ text: prompt }] }],
+        })
       );
+
       const text = result.response.text();
       return text;
     } catch (error) {

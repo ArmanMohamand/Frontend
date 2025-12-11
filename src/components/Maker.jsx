@@ -52,7 +52,7 @@ const Maker = () => {
         />
       </h2>
       {showAi && (
-        <div className="fixed bottom-0 right-0 m-7 bg-[#002D9C] rounded-2xl border-t border-l border-r border-white flex flex-col md:h-[95vh] md:w-[55vw] lg:h-[80vh] lg:w-[706px] h-[90vh] w-[85vw] opacity-75">
+        <div className="fixed bottom-0 right-0 m-7 bg-[#002D9C] rounded-2xl border-t border-l border-r border-white flex flex-col md:h-[75vh] md:w-[55vw] lg:h-[80vh] lg:w-[706px] h-[60vh] w-[85vw] opacity-75">
           <div className="flex justify-between items-center px-5 pt-5">
             <h2 className="main text-2xl font-medium text-white">FitzAi</h2>
             <div className="group relative inline-block">

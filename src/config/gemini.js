@@ -11,12 +11,11 @@
 //   "gemini-1.5-pro",
 //   "gemini-1.5-flash",
 // ];
-
-// const API_KEY = "AIzaSyCI7o2vSQMCX3U2ooLgKplhHepvwV0TSpQ";
+// const API_KEY = "AIzaSyACmTlgvIzWMMcg_LNp17zm1eo5_-NTvGM";
 // async function runChat(prompt) {
 //   for (let model of MODEL_PRIORITY) {
 //     try {
-//       // AIzaSyCI7o2vSQMCX3U2ooLgKplhHepvwV0TSpQ
+// AIzaSyACmTlgvIzWMMcg_LNp17zm1eo5_-NTvGM    new
 //       const genAI = new GoogleGenerativeAI(API_KEY);
 //       const generativeModel = genAI.getGenerativeModel({
 //         model,
@@ -69,17 +68,9 @@ import {
   HarmBlockThreshold,
 } from "@google/generative-ai";
 
-const MODEL_PRIORITY = [
-  "gemini-2.5-flash",
-  "gemini-2.5-flash-lite",
-  "gemini-2.0-flash",
-  "gemini-1.5-pro",
-  "gemini-1.5-flash",
-];
+const MODEL_PRIORITY = ["gemini-2.0-flash"];
 
-const API_KEY = "AIzaSyBCtyio-zXS4HLNwXfDOrXvPuXPsGFUl-w";
-
-// 🔄 Retry helper with exponential backoff
+const API_KEY = "AIzaSyACmTlgvIzWMMcg_LNp17zm1eo5_-NTvGM";
 async function retryWithBackoff(fn, retries = 3, delay = 1000) {
   for (let i = 0; i < retries; i++) {
     try {
@@ -87,7 +78,7 @@ async function retryWithBackoff(fn, retries = 3, delay = 1000) {
     } catch (err) {
       const is503 = err?.message?.includes("503");
       if (!is503 || i === retries - 1) throw err;
-      await new Promise(res => setTimeout(res, delay * (i + 1)));
+      await new Promise((res) => setTimeout(res, delay * (i + 1)));
     }
   }
 }
@@ -124,10 +115,14 @@ async function runChat(prompt) {
         ],
       });
 
-      // ✅ Correct request structure
       const result = await retryWithBackoff(() =>
         generativeModel.generateContent({
-          contents: [{ role: "user", parts: [{ text: prompt }] }],
+          contents: [
+            {
+              role: "user",
+              parts: [{ text: prompt }],
+            },
+          ],
         })
       );
 
@@ -137,6 +132,7 @@ async function runChat(prompt) {
       const quotaHit =
         error?.message?.includes("429") || error?.message?.includes("quota");
       if (!quotaHit) {
+        console.error(`[Error] Model: ${model}`, error);
         return " Something went wrong. Please try again later.";
       }
       console.warn(`[Quota Hit] Model: ${model} | Key: ${API_KEY}`);

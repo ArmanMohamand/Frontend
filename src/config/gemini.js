@@ -12,11 +12,11 @@ const MODEL_PRIORITY = [
   "gemini-1.5-flash",
 ];
 
-const API_KEY = "AIzaSyBCtyio-zXS4HLNwXfDOrXvPuXPsGFUl-w";
+const API_KEY = "AIzaSyCI7o2vSQMCX3U2ooLgKplhHepvwV0TSpQ";
 async function runChat(prompt) {
   for (let model of MODEL_PRIORITY) {
     try {
-      // AIzaSyBCtyio-zXS4HLNwXfDOrXvPuXPsGFUl-w
+      // AIzaSyCI7o2vSQMCX3U2ooLgKplhHepvwV0TSpQ
       const genAI = new GoogleGenerativeAI(API_KEY);
       const generativeModel = genAI.getGenerativeModel({
         model,
@@ -62,4 +62,3 @@ async function runChat(prompt) {
   return "__GEMINI_QUOTA_EXHAUSTED__";
 }
 export default runChat;
-

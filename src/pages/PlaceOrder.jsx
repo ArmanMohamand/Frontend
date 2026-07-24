@@ -38,13 +38,6 @@ const PlaceOrder = () => {
         orderItems.push({ ...item, quantity: cartItem[item._id] });
       }
     });
-
-    // const orderData = {
-    //   userId: userId,
-    //   address: data,
-    //   items: orderItems,
-    //   amount: discountedTotal || countTotalCartAmount() + 20, // ✅ use promo if available
-    // };
     const orderData = {
       userId: userId,
       address: data,
@@ -91,7 +84,6 @@ const PlaceOrder = () => {
       });
       setTimeout(() => navigate("/cart"), 1000);
     }
-    // check if cart has any items
     const hasItems = Object.values(cartItem).some((qty) => qty > 0);
     if (!hasItems) {
       toast.info("Your cart is empty", {
